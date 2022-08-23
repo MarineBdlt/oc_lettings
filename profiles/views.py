@@ -12,7 +12,7 @@ massa dolor cursus neque, quis dictum lacus d
 def index(request):
     profiles_list = Profile.objects.all()
     context = {"profiles_list": profiles_list}
-    return render(request, "index.html", context)
+    return render(request, "profiles/index.html", context)
 
 
 """
