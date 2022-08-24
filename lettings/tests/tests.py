@@ -5,8 +5,9 @@ from pytest_django.asserts import assertTemplateUsed
 
 from lettings.models import Letting, Address
 
-# INDEX
-# VERIFIER PATH URL AVEC REVERSE + ELEMENT DE TITRE AVEC HTML
+# ANCHOR
+# REFACTO
+# DEVELOPPER LES TESTS ? TESTER LES INSTANCES ?
 @pytest.mark.django_db
 def test_lettings_index_url():
     path = reverse("lettings_index")
