@@ -24,7 +24,6 @@ def test_profiles_index_view():
 
     assert expected_content in content
     assert response.status_code == 200
-    path = reverse("profiles_index")
     assertTemplateUsed(response, "profiles/index.html")  # CHANGER NOM DE TEMPLATE
 
 
@@ -34,7 +33,6 @@ def test_profiles_detail_view():
     user = User.objects.create(username="User", password="Passwordpassword")
     Profile.objects.create(user=user, favorite_city="Paris")
     path = reverse("profile", kwargs={"username": f"{user.username}"})
-    cur_profile = Profile.objects.get(id=1)
     response = client.get(path)
     content = response.content.decode()
     expected_content = f"<h1>{user.username}</h1>"

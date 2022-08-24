@@ -26,7 +26,6 @@ def test_lettings_index_view():
 
     assert expected_content in content
     assert response.status_code == 200
-    path = reverse("lettings_index")
     assertTemplateUsed(response, "lettings/index.html")  # CHANGER NOM DE TEMPLATE
 
 
