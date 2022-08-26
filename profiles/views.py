@@ -27,4 +27,4 @@ Pellentesque habitant morbi tristique senectus et netus et males
 def profile(request, username):
     profile = Profile.objects.get(user__username=username)
     context = {"profile": profile}
-    return render(request, "profile.html", context)
+    return render(request, "profiles/profile.html", context)
