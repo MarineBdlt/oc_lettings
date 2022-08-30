@@ -24,7 +24,7 @@ def test_profiles_index_view():
 
     assert expected_content in content
     assert response.status_code == 200
-    assertTemplateUsed(response, "profiles/index.html")  # CHANGER NOM DE TEMPLATE
+    assertTemplateUsed(response, "profiles/index.html")
 
 
 @pytest.mark.django_db
@@ -39,4 +39,4 @@ def test_profiles_detail_view():
 
     assert expected_content in content
     assert response.status_code == 200
-    assertTemplateUsed(response, "profiles/profile.html")  # CHANGER NOM DE TEMPLATE
+    assertTemplateUsed(response, "profiles/profile.html")
