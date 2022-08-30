@@ -1,3 +1,5 @@
 **/__pycache__
 *.pyc
 venv
+:Users:bapmarine:Python-OC-Lettings-FR:oc_lettings_site.sqlite3
+.gitignore

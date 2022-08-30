@@ -1,0 +1,9 @@
+[coverage:run]
+omit = 
+    */tests/*
+    */migrations/*
+    */apps.py
+    */__init__.py
+    */wsgi.py
+    */asgi.py
+    manage.py
