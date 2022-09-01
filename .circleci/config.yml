@@ -38,6 +38,15 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: pytest
+  deploy:
+    docker:
+      - image: cimg/python:3.10.2
+    working_directory: ~/Python-OC-Lettings-FR
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run: echo deploy
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -46,4 +55,16 @@ workflows:
   test-the-application: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
+      - test:
+          filters:
+            branches:
+              ignore: master
+  deploy-application:
+    jobs:
       - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
