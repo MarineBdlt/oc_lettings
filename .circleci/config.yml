@@ -11,6 +11,11 @@ orbs:
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.5.0
 
+executors:
+  my-machine:
+    machine: true
+    working_directory: /tmp/workspace
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -35,18 +40,26 @@ jobs:
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
-          name: Run tests
+          name: Run pytest
           # This assumes pytest is installed via the install-package step above
           command: pytest
-  deploy:
-    docker:
-      - image: cimg/python:3.10.2
-    working_directory: ~/Python-OC-Lettings-FR
+      - run:
+          name: linting PEP8
+          command: flake8
+
+  build-push-docker:
+    executor: my-machine
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      - run: echo deploy
+      - run:
+          name: Build Docker image
+          command: docker build -t marinebdlt/lettings:$CIRCLE_SHA1 .
+      - run:
+          name: Push Docker Image
+          command: |
+            docker tag marinebdlt/lettings:$CIRCLE_SHA1 marinebdlt/lettings:lastest
+            docker push marinebdlt/lettings:$CIRCLE_SHA1
+            docker push marinebdlt/lettings:lastest
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -59,10 +72,10 @@ workflows:
           filters:
             branches:
               ignore: master
-  deploy-application:
+  push-the-application:
     jobs:
       - test
-      - deploy:
+      - build-push-docker:
           requires:
             - test
           filters:
