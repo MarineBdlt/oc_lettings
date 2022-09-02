@@ -62,6 +62,20 @@ jobs:
             docker push marinebdlt/lettings:$CIRCLE_SHA1
             docker push marinebdlt/lettings:lastest
 
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run: heroku maintenance:on --app oc-lettings-app
+      - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a oc-lettings-app
+      - run: heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-app
+      # - run: heroku config:set SENTRY_DSN=$SENTRY_DSN -a oc-lettings-app
+      - run: heroku stack:set heroku-20 -a oc-lettings-app
+      - run: heroku maintenance:off --app oc-lettings-app
+      - heroku/deploy-via-git:
+          force: true
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
