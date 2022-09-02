@@ -58,6 +58,7 @@ jobs:
           name: Push Docker Image
           command: |
             docker tag marinebdlt/lettings:$CIRCLE_SHA1 marinebdlt/lettings:lastest
+            docker login -u marinebdlt -p Papapapa1218* docker.io
             docker push marinebdlt/lettings:$CIRCLE_SHA1
             docker push marinebdlt/lettings:lastest
 
