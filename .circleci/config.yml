@@ -45,7 +45,7 @@ jobs:
           command: pytest
       - run:
           name: linting PEP8
-          command: flake8
+          command: flake8 --ignore=F403, F401, F405
 
   build-push-docker:
     executor: my-machine
