@@ -58,7 +58,7 @@ jobs:
           name: Push Docker Image
           command: |
             docker tag marinebdlt/lettings:$CIRCLE_SHA1 marinebdlt/lettings:lastest
-            docker login -u marinebdlt -p Papapapa1218* docker.io
+            docker login -u marinebdlt -p $PASSWORD docker.io 
             docker push marinebdlt/lettings:$CIRCLE_SHA1
             docker push marinebdlt/lettings:lastest
 
@@ -66,16 +66,27 @@ jobs:
     executor: heroku/default
     steps:
       - checkout
-      - heroku/install
-      - run: heroku maintenance:on --app oc-lettings-app
-      - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a oc-lettings-app
-      - run: heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-app
-      # - run: heroku config:set SENTRY_DSN=$SENTRY_DSN -a oc-lettings-app
-      - run: heroku stack:set heroku-20 -a oc-lettings-app
-      - run: heroku maintenance:off --app oc-lettings-app
-      - heroku/deploy-via-git:
-          force: true
-
+      - run:
+          name: Deploy on Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a nom-de-application web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a nom-de-application web
+      # - heroku/install
+      # - run: heroku maintenance:on --app oc-lettings-app
+      # - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a oc-lettings-app
+      # - run: heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-app
+      # # - run: heroku config:set SENTRY_DSN=$SENTRY_DSN -a oc-lettings-app
+      # - run: heroku stack:set heroku-20 -a oc-lettings-app
+      # - run: heroku maintenance:off --app oc-lettings-app
+      # - heroku/deploy-via-git:
+      #     force: true
+      # command: |
+      #       sudo curl https://cli-assets.heroku.com/install.sh | sh
+      #       HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+      #       HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a nom-de-application web
+      #       HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a nom-de-application web
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -96,3 +107,7 @@ workflows:
           filters:
             branches:
               only: master
+
+              # HEROKU LOGIN TEMRINAL
+              # AUTH TOKEN TERMINAL
+              # RECUPERER LE TOKEN
