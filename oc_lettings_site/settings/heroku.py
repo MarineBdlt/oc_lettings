@@ -27,8 +27,15 @@ from oc_lettings_site.settings.base import *
 DEBUG = env("DEBUG")
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY")  # UTILE ?
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+# HEROKU_TOKEN = env("HEROKU_TOKEN")  # NE MARCHE PAS
+
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS"
+)  # COMMENT REMPLIR ALLOW HOST dans les var d'environnement ?
 
 # RENTRER DANS ENV VARIABLES HEROKU
+
+# SENTRY, CREER PROJET DJANGO, RECUPERER CODE A COLLER DANS LES SETTINGS
+# ADRESSE NOMINATIVE A METTRE DANS L'ENVIRONNEMENT DE HEROKU

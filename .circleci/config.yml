@@ -10,6 +10,7 @@ orbs:
   # so you dont have to copy and paste it everywhere.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.5.0
+  heroku: circleci/heroku@1.2.6
 
 executors:
   my-machine:
@@ -63,32 +64,16 @@ jobs:
             docker push marinebdlt/lettings:lastest
 
   deploy:
-    executor: heroku/default
+    machine: True
     steps:
       - checkout
       - run:
           name: Deploy on Heroku
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a nom-de-application web
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a nom-de-application web
-      # - heroku/install
-      # - run: heroku maintenance:on --app oc-lettings-app
-      # - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a oc-lettings-app
-      # - run: heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-app
-      # # - run: heroku config:set SENTRY_DSN=$SENTRY_DSN -a oc-lettings-app
-      # - run: heroku stack:set heroku-20 -a oc-lettings-app
-      # - run: heroku maintenance:off --app oc-lettings-app
-      # - heroku/deploy-via-git:
-      #     force: true
-      # command: |
-      #       sudo curl https://cli-assets.heroku.com/install.sh | sh
-      #       HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-      #       HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a nom-de-application web
-      #       HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a nom-de-application web
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+            HEROKU_API_KEY=03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:login
+            HEROKU_API_KEY=03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:push -a lettings-app-op web
+            HEROKU_API_KEY=03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:release -a lettings-app-op web
 workflows:
   version: 2
   test-the-application: # This is the name of the workflow, feel free to change it to better match your workflow.
@@ -107,7 +92,39 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy:
+          requires:
+            - test
+            - build-push-docker
+          filters:
+            branches:
+              only: master
+  # deploy-the-application:
+  #   jobs:
+  #     - test
+  #     - build-push-docker
+  #     - deploy:
+  #         filters:
+  #           branches:
+  #             only: master
 
-              # HEROKU LOGIN TEMRINAL
-              # AUTH TOKEN TERMINAL
-              # RECUPERER LE TOKEN
+  # HEROKU LOGIN TEMRINAL
+  # AUTH TOKEN TERMINAL
+  # RECUPERER LE TOKEN
+
+  # - heroku/install
+  # - run: heroku maintenance:on --app oc-lettings-app
+  # - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a oc-lettings-app
+  # - run: heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-app
+  # # - run: heroku config:set SENTRY_DSN=$SENTRY_DSN -a oc-lettings-app
+  # - run: heroku stack:set heroku-20 -a oc-lettings-app
+  # - run: heroku maintenance:off --app oc-lettings-app
+  # - heroku/deploy-via-git:
+  #     force: true
+  # command: |
+  #       sudo curl https://cli-assets.heroku.com/install.sh | sh
+  #       HEROKU_API_KEY=$ 03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:login
+  #       HEROKU_API_KEY=$ 03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:push -a nom-de-application web
+  #       HEROKU_API_KEY=$ 03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:release -a nom-de-application web
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows

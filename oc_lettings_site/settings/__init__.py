@@ -1,6 +1,6 @@
 from .base import *
 
-env_name = os.getenv("ENV_NAME", "local")
+env_name = os.getenv("ENV_NAME", "heroku")
 
 print("ENV_NAME", env_name)
 

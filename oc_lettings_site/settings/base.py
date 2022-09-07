@@ -31,7 +31,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "oc_lettings_site.settings.wsgi.application"
+WSGI_APPLICATION = "oc_lettings_site.wsgi.application"
 
 
 # Database
