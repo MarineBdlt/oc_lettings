@@ -8,8 +8,6 @@ DEBUG = True
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 # Take environment variables from .env file
 SECRET_KEY = env("SECRET_KEY")
-PASSWORD = env("PASSWORD")
-
-print(PASSWORD)
+# PASSWORD = env("PASSWORD")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
