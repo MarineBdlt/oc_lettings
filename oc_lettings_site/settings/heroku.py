@@ -8,7 +8,7 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
-    dsn="https://b78c3fb5520f4aa387d7cd89da439647@o1401908.ingest.sentry.io/6733392",
+    dsn=env("SENTRY_DSN"),
     integrations=[
         DjangoIntegration(),
     ],
