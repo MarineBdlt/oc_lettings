@@ -1,9 +1,6 @@
 """
 Production Settings for Heroku
 """
-# flake8: noqa: F403 , F405 # Bypass Flake8 star import
-# If using in your own project, update the project namespace below
-
 # import sentry_sdk
 # from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -26,14 +23,9 @@ from oc_lettings_site.settings.base import *
 # False if not in os.environ
 DEBUG = env("DEBUG")
 
-# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env("SECRET_KEY")  # UTILE ?
+SECRET_KEY = env("SECRET_KEY")
 
-# HEROKU_TOKEN = env("HEROKU_TOKEN")  # NE MARCHE PAS
-
-ALLOWED_HOSTS = env.list(
-    "ALLOWED_HOSTS"
-)  # COMMENT REMPLIR ALLOW HOST dans les var d'environnement ?
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # RENTRER DANS ENV VARIABLES HEROKU
 

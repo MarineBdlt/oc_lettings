@@ -25,17 +25,12 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# ALLOWED_HOSTS = []
+DEBUG = False
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "oc_lettings_site.apps.OCLettingsSiteConfig",
     "django.contrib.admin",
