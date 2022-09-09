@@ -1,9 +1,11 @@
 import os
 import environ
 
+# Quick-start development settings - https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, True)
+    DEBUG=(bool, False)
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,15 +24,8 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-
 # Application definition
+
 INSTALLED_APPS = [
     "oc_lettings_site.apps.OCLettingsSiteConfig",
     "django.contrib.admin",
@@ -58,7 +53,6 @@ ROOT_URLCONF = "oc_lettings_site.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        # "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
