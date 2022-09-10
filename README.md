@@ -137,13 +137,11 @@ Création des variables d'environnement au niveau du projet :
 | Nom des Variables | Description                             | Valeurs à renseigner                                                         |
 | ----------------- | --------------------------------------- | ---------------------------------------------------------------------------- |
 | DOCKER_USER       | User Docker Hub                         | `marinebdlt`                                                                 |
-| PASSWORD          | Token Dockerhub ou Mdp                  |
-| `Papapapa1218*`   |
-| HEROKU_API_KEY    | API Token Heroku                        | `75def0f9-7094-4273-9085-b5cc41f2abfa`                                       |
+| PASSWORD          | Token Dockerhub ou Mdp                  |`Papapapa1218*`   |
+| HEROKU_API_KEY    | API Token Heroku                        | `3860530-81a3-4da2-a2e1-cf77cea0fbcf`                                       |
 | SENTRY_DSN        | URL Sentry                              | `https://c572ef3b0f2340a6ad81447ba2d16b1c@o1401908.ingest.sentry.io/6734060` |
 | SECRET_KEY        | DJANGO SECRET_KEY                       | `fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s`                         |
-| ENV_NAME          | Le nom de l'environnement de production |
-| `heroku `         |
+| ENV_NAME          | Le nom de l'environnement de production | `heroku `         |
 
 ---
 
