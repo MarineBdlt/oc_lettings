@@ -48,9 +48,9 @@ jobs:
           name: Deploy on Heroku
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:login
-            HEROKU_API_KEY=03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:push -a lettings-app-op web
-            HEROKU_API_KEY=03860530-81a3-4da2-a2e1-cf77cea0fbcf heroku container:release -a lettings-app-op web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a lettings-app-op web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a lettings-app-op web
 workflows:
   version: 2
   test-the-application:
