@@ -118,3 +118,6 @@ if "SENTRY_DSN" in os.environ:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True,
     )
+
+if "HEROKU_TOKEN" in os.environ:
+    HEROKU_TOKEN = os.environ.get("HEROKU_TOKEN")
