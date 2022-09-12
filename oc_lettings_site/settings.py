@@ -15,12 +15,7 @@ DEBUG = os.environ.get("DEBUG", default=False)
 
 ALLOWED_HOSTS = [".herokuapp.com", "localhost", "0.0.0.0", "127.0.0.1"]
 
-<<<<<<< HEAD:oc_lettings_site/settings.py
 WSGI_APPLICATION = "oc_lettings_site.wsgi.application"
-=======
-WSGI_APPLICATION = "oc_lettings_site.settings.wsgi.application"
-
->>>>>>> 0c930b3 (replace wgsi settings):oc_lettings_site/settings/base.py
 
 # Application definition
 INSTALLED_APPS = [
