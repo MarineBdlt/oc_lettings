@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=False))
+DEBUG = os.environ.get("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["lettings-app-op.herokuapp.com", "localhost", "127.0.0.1"]
 
@@ -104,8 +104,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 if "SENTRY_DSN" in os.environ:
+    SENTRY_DSN = os.environ.get("SENTRY_DSN")
     sentry_sdk.init(
-        dsn=f"os.environ.get('SENTRY_DSN')",
+        dsn=SENTRY_DSN,
         integrations=[
             DjangoIntegration(),
         ],
