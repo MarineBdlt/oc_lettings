@@ -104,8 +104,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 if "SENTRY_DSN" in os.environ:
+    SENTRY_DSN = os.environ.get("SENTRY_DSN")
     sentry_sdk.init(
-        dsn=f"os.environ.get('SENTRY_DSN')",
+        dsn=SENTRY_DSN,
         integrations=[
             DjangoIntegration(),
         ],
