@@ -22,6 +22,8 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
+WSGI_APPLICATION = "oc_lettings_site.settings.wsgi.application"
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -62,8 +64,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = "oc_lettings_site.wsgi.application"
 
 
 # Database
