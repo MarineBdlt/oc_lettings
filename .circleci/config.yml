@@ -31,7 +31,7 @@ jobs:
       - checkout
       - run:
           name: Build Docker image
-          command: docker buildx build -t marinebdlt/lettings:$CIRCLE_SHA1 .
+          command: docker buildx build --platform linux/amd64 -t marinebdlt/lettings:$CIRCLE_SHA1 .
       - run:
           name: Push Docker Image
           command: |
