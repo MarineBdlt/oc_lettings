@@ -31,7 +31,7 @@ jobs:
       - checkout
       - run:
           name: Build Docker image
-          command: docker buildx build --platform linux/amd64 -t marinebdlt/lettings:$CIRCLE_SHA1 .
+          command: docker build -t marinebdlt/lettings:$CIRCLE_SHA1 .
       - run:
           name: Push Docker Image
           command: |
@@ -49,8 +49,8 @@ jobs:
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a lettings-app-op web
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a lettings-app-op web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a oc-lettings-app web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a oc-lettings-app web
 workflows:
   version: 2
   test-the-application:
