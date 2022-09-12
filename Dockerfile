@@ -10,6 +10,7 @@ EXPOSE 8000
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 =======
 >>>>>>> 0c930b3 (replace wgsi settings)
@@ -22,3 +23,6 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 CMD gunicorn oc_lettings_site.settings.wsgi:application --bind 0.0.0.0:$PORT
 >>>>>>> 0e9c3b1 (kj)
+=======
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+>>>>>>> 70a555a (heroku token added in settings)
