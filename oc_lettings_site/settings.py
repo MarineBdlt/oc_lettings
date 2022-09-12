@@ -1,29 +1,21 @@
 import os
-import environ
 
-# Quick-start development settings - https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Take environment variables from .env file for local use
-if os.path.isfile(BASE_DIR + "/settings/.env"):
-    environ.Env.read_env(BASE_DIR + "/settings/.env")
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = ["lettings-app-op.herokuapp.com", "localhost", "127.0.0.1"]
 
-WSGI_APPLICATION = "oc_lettings_site.settings.wsgi.application"
-
+WSGI_APPLICATION = "oc_lettings_site.wsgi.application"
 
 # Application definition
 INSTALLED_APPS = [
@@ -110,3 +102,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = "/static/"
+
+sentry_sdk.init(
+    dsn=f"os.environ.get('SENTRY')",
+    integrations=[
+        DjangoIntegration(),
+    ],
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+)
